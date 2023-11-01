@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  app:
+    container_name: core
+    build: .
+      # context: ./core
+      # dockerfile: Dockerfile
+   
+    volumes:
+    #  - ./static:/static
+    #  - ./media:/media
+     - ./core:/app
+
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - postgresnetwork
+   
+    env_file: ../.env   
+   
+    depends_on:
+      - jobpostgresql
+      
+  jobpostgresql:
+    image: postgres:14 
+    container_name: jobpostgresql
+    volumes:
+      - jobpostgres:/var/lib/postgresql/data
+    restart: always
+    env_file: ../.env
+    ports:
+      - "5433:5432"
+    networks:
+      - postgresnetwork
+
+ 
+ 
+networks:
+  postgresnetwork:
+    external: true
+volumes:
+  jobpostgres:
+    external: true
