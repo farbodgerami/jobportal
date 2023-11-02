@@ -5,6 +5,7 @@ import cookie from "cookie";
 export default async (req, res) => {
   if (req.method === "GET") {
     const cookies = cookie.parse(req.headers.cookie || "");
+    console.log("from usercookieeeeeeeeeeeeee",cookies)
     const access = cookies.access || false;
     if (!access) {
       return res.status(401).json({ message: "Login first to load user" });
@@ -14,7 +15,7 @@ export default async (req, res) => {
         `${process.env.API_URL}/apii/account/me/`,
  
 
-        { headers: { Authorization: `Bearer ${access}` } }
+        { headers: { Authorization: `Bearer ${access}` ,} }
       );
       if(response.data){
         return res.status(200).json({user:response.data})

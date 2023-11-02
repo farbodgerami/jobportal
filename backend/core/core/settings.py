@@ -133,10 +133,10 @@ USE_TZ = True
 
 CORS_ALLOWED_ORIGINS = [  
  
-    "http://localhost", "http://188.121.102.5",
+    "http://localhost", "http://188.121.102.5","http://172.20.10.5",
     "http://127.0.0.1","http://localhost:3000","http://127.0.0.1:3000"
 ]
-CSRF_TRUSTED_ORIGINS = [ 'http://*.127.0.0.1',"http://localhost","http://localhost:3000","http://127.0.0.1:3000","http://188.121.102.5"]  
+CSRF_TRUSTED_ORIGINS = [ 'http://*.127.0.0.1',"http://localhost","http://localhost:3000","http://127.0.0.1:3000","http://188.121.102.5","http://172.20.10.5"]  
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 # STATICFILES_DIRS=(BASE_DIR / 'build',BASE_DIR / 'template')

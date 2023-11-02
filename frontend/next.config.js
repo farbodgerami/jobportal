@@ -11,7 +11,7 @@ const nextConfig = {
       return [
           {
               source: '/apii/:path*',
-              destination: 'http://jobportalbackend:8000/:path*',
+              destination: 'http://jobportalbackend:8000/apii/:path*',
             },
           ]
         },
