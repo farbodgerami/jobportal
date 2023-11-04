@@ -45,18 +45,7 @@ services:
     depends_on:
     - jobportalbackend
   
-  nginx:
-    container_name: nginx
-    build: 
-      context: ./nginx
-      dockerfile: Dockerfile
-
-    ports:
-      - 80:80
-    networks:
-      - postgresnetwork
-    depends_on:
-      - nextapp
+ 
 
    
     # volumes:
