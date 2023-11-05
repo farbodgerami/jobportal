@@ -36,7 +36,7 @@ export async function getServerSideProps(props) {
     max_salary = max;
   }
   // tavajjoh shavad ke agar dar &jobType=${jobType}&jobType=Temporary , ${jobType} khali bashad kollan kar nemikonad pass nabayad kahli bezarish. bayad ba har entekhab ezafe va hazf shavad.
-  const queryStr = `keyword=${keyword}&location=${location}&page=${page}&jobType=${jobType}&jobType=Temporary&education=${education}&experience=${experience}&min_salary=${min_salary}&max_salary=${max_salary}`;
+  const queryStr = `keyword=${keyword}&location=${location}&page=${page}&jobType=${jobType}&education=${education}&experience=${experience}&min_salary=${min_salary}&max_salary=${max_salary}`;
   let data="";
   try {
     const res = await axios.get(`${process.env.API_URL}/apii/jobs?${queryStr}`);
