@@ -32,18 +32,18 @@ services:
       - jobpostgresql
       
   
-  nextapp:
-    container_name: nextapp
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile.production
-    restart: always
-    ports:
-      - 3000:3000
-    networks:
-      - postgresnetwork
-    depends_on:
-    - jobportalbackend
+  # nextapp:
+  #   container_name: nextapp
+  #   build: 
+  #     context: ./frontend
+  #     dockerfile: Dockerfile.production
+  #   restart: always
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - postgresnetwork
+  #   depends_on:
+  #   - jobportalbackend
   
  
 
