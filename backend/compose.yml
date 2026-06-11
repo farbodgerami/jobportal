@@ -48,15 +48,6 @@ services:
 
 
 
- 
-
-    # "npm i axios cookie moment react-data-table-component react-js-pagination react-toastify --save"
-
- 
- 
-# networks:
-#   postgresnetwork:
-#     external: true
 volumes:
   jobpostgres:
     external: true
