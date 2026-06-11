@@ -12,18 +12,16 @@ from .filters import *
 from rest_framework.permissions import IsAuthenticated
 @api_view(["GET"])
 def getAllJobs(request):
-    # print('ddddddddddddddd',request.GET )#ddddddddddddddd <QueryDict: {'keyword': [''], 'location': [''], 'a': ['t,y']}>>
-    # jobs = Job.objects.all()
+ 
     filterset=JobsFilter(request.GET,queryset=Job.objects.all().order_by('id'))
-    # pagination
+ 
     count=filterset.qs.count() 
     resPerPage=3
     paginator=PageNumberPagination()
     paginator.page_size=resPerPage
     queryset=paginator.paginate_queryset(filterset.qs,request)
     serializer = JobSerializer(queryset, many=True)
-    # print("aaaad")
-    # to go to next page: jobs/?page=2
+    
     return Response({"count":count,"resPerPage":resPerPage,"jobs":serializer.data})
 
 
@@ -39,7 +37,7 @@ def getJob(request, pk):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def newJob(request):
-    # adding user to request.data
+    
     request.data['user']=request.user
     data = request.data
     job = Job.objects.create(**data)
@@ -51,7 +49,7 @@ def newJob(request):
 @permission_classes([IsAuthenticated])
 def updateJob(request, pk):
     job = get_object_or_404(Job, id=pk)
-    # print('llllllllllllll',job.user)
+    
     if request.user!=job.user:
         return Response({'message':'you cannot update this job'},status=status.HTTP_400_BAD_REQUEST)
     job.title = request.data['title']
@@ -67,7 +65,7 @@ def updateJob(request, pk):
     job.company = request.data['company']
     job.save()
     serializer = JobSerializer(job, many=False)
-    # print(serializer.data)
+ 
     return Response(serializer.data)
 
 
@@ -85,9 +83,9 @@ def deleteJob(request, pk):
 @api_view(['GET'])
 def getTopicStats(requeset, topic):
     args = {'title__contains': topic}
-    # print(topic)
+ 
     jobs = Job.objects.filter(**args)
-    # print(jobs)
+  
     if len(jobs) == 0:
         return Response({"message": f"Not Status found for ${topic}"})
     stats = jobs.aggregate(total_jobs=Count('title'),
@@ -95,7 +93,7 @@ def getTopicStats(requeset, topic):
           avg_salary=Avg('salary'), 
           min_salary=Min('salary'), 
           max_salary=Max('salary'))
-    # print(stats)
+    
     return Response(stats)
 
 from django.utils import timezone
@@ -103,7 +101,7 @@ from django.utils import timezone
 @permission_classes([IsAuthenticated])
 def applyToJob(request,id):
     user=request.user
-    # print('ddddddddddddddddddd',user)
+   
     job=get_object_or_404(Job,id=id)
     userprofile=get_object_or_404(UserProfile,user=user)
     if userprofile.resume == "":
@@ -113,9 +111,7 @@ def applyToJob(request,id):
     
  
     alreadyApplied=CandidatesApplied.objects.filter(user=user,job=job).exists()
-    # related name for CandidatesApplied
-    # alreadyApplied=job.candidatesapplied_set.filter(user=user).exists()
-
+ 
     if alreadyApplied:
         return Response({"error":'you have already applied to this job'},status=status.HTTP_400_BAD_REQUEST)
     
@@ -127,9 +123,9 @@ def applyToJob(request,id):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getCurrentUserAppliedJobs(request):
-    # args={'user_id': request.user.id}
+     
     candidates=CandidatesApplied.objects.filter(user_id= request.user.id)
-    # candidates=CandidatesApplied.objects.filter(**args)
+   
     serializer=CandidatesAppliedSerializer(candidates,many=True)
     return Response(serializer.data)
 
@@ -139,8 +135,7 @@ def getCurrentUserAppliedJobs(request):
 def isApplied(request,id):
     user=request.user
     job=get_object_or_404(Job,id=id)
-    # applied=job.candidatesapplied_set.filter(user=user).exists()
-    # return Response(applied)
+ 
     alreadyApplied=CandidatesApplied.objects.filter(user=user,job=job).exists()
     return Response(alreadyApplied)
 
@@ -156,18 +151,18 @@ def getCurrentUserJobs(request,):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getCandidatesApplied(request,id):
-    # print(id)
+ 
     user=request.user
     job=get_object_or_404(Job,id=id)
     if job.user != user:
         return Response({'error':'you can not access this job'},status=status.HTTP_403_FORBIDDEN)
     
     candidates=job.candidatesapplied_set.all()
-    # candidates=CandidatesApplied.objects.filter(job=job)
+ 
     serializer=CandidatesAppliedSerializer(candidates,many=True)
     return Response(serializer.data)
 
-# vase khodam:
+ 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def getCandidatesAppliedme(request):

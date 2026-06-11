@@ -13,7 +13,7 @@ def register(request):
     data=request.data
     user=SignUpSerializer(data=data)
     if user.is_valid():
-        # print(user)
+       
         if not User.objects.filter(username=data['email']).exists():
             user=User.objects.create(
                 first_name=data['first_name'],
@@ -22,7 +22,7 @@ def register(request):
                 email=data['email'],
                 password=make_password(data['password'])
             )
-            # print('done......................')
+             
             return Response({'message':"user created"},status=status.HTTP_200_OK)
         else:
             return Response({'error':"User already exists"},status=status.HTTP_400_BAD_REQUEST)
@@ -69,8 +69,7 @@ def uploadResume(request):
 
     isValidFile = validate_file_extension(resume.name)
 
-    # if not isValidFile:
-    #   return Response({ 'error': 'Please upload only pdf file.' }, status=status.HTTP_400_BAD_REQUEST)
+     
     userprofile=UserProfile.objects.create(user=user,resume=resume)
     serializer = UserSerializer(user, many=False)
     

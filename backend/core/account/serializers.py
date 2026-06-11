@@ -14,7 +14,7 @@ class SignUpSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     resume=serializers.CharField(source='userProfile.resume')
-    # resume=serializers.FileField(source='userProfile.resume')
+
     test=serializers.CharField(source='userProfile.test')
  
     class Meta:

@@ -1,8 +1,7 @@
  
 from django.db import models
 from django.core.validators import MinValueValidator,MaxValueValidator
-# from django.contrib.gis.db import models as gismodels
-# from django.contrib.gis.geos import Point
+ 
 from django.contrib.auth.models import User
 from datetime import *
 # import geocoder
@@ -17,13 +16,7 @@ class Education(models.TextChoices):
     Bachelors="Bachelors"
     Masters='Masters'
     Phd='Phd'
-# from enum import Enum
-# class Education(Enum):
-#     Bachelors="Bachelors"
-#     Masters='Masters'
-#     Phd='Phd'
-# JobType={"Permanent":"Permanent","Temporary":"Temporary","InterShip":"InterShip",}
-
+ 
 class Industry(models.TextChoices):
     Business="Business"
     IT="IT"
@@ -53,20 +46,12 @@ class Job(models.Model):
     salary=models.IntegerField(default=1,validators=[MinValueValidator(1),MaxValueValidator(1000000)])
     positions=models.IntegerField(default=1)
     company= models.CharField(max_length=100,null=True)
-    # point=gismodels.PointField(default=Point(0.0,0.0))
+ 
     lastDate=models.DateTimeField(default=return_date_time)
     user=models.ForeignKey(User,on_delete=models.SET_NULL, null=True)
     createdAt=models.DateTimeField(auto_now_add=True)
 
-    # def save(self,*args,**kwargs):
-    #     g=geocoder.mapquest(self.address,key=os.environ.get('GEOCODER_API'))
-    #     lng =g.lng
-    #     lat =g.lat
-
-    #     self.point =Point(lng,lat)
-    #     super(Job,self).save(*args,**kwargs)
-     
-
+ 
 class CandidatesApplied(models.Model):
     job=models.ForeignKey(Job,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)

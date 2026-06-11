@@ -8,7 +8,7 @@ class JobSerializer(serializers.ModelSerializer):
         fields='__all__'
         
 class CandidatesAppliedSerializer(serializers.ModelSerializer):
-    # ino vase tlow test kon:
+ 
     job=JobSerializer()
  
     class Meta:

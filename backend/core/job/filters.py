@@ -12,7 +12,7 @@ class JobsFilter(django_filters.FilterSet):
  
     class Meta:
         model=Job
-        # fields=('education','jobType','experience','min_salary','max_salary',"keyword",'location')
+     
         fields={} 
 
 
@@ -21,33 +21,4 @@ class JobsFilter(django_filters.FilterSet):
 
 
 
-
-
-
-
-# class PropertyFilter(django_filters.FilterSet):
-# city = django_filters.ModelMultipleChoiceFilter(queryset=City.objects.all(), widget = CheckboxSelectMultiple)
-# trade_type = django_filters.ModelMultipleChoiceFilter(queryset=Trade.objects.all(), widget = CheckboxSelectMultiple)
-
-# class Meta:
-#     model = Property
-#     fields = ['city', 'trade_type']
-
-
-# class CustomFilterList(django_filters.Filter):
-#     def filter(self, qs, value):
-#         if value not in (None, ''):
-#             values = [v for v in value.split(',')]
-#             return qs.filter(**{'%s__%s' % (self.name, self.lookup_type): values})
-#         return qs
-
-# class PropertyFilter(django_filters.FilterSet):
-#     city = django_filters.ModelMultipleChoiceFilter(queryset=City.objects.all(), widget = CheckboxSelectMultiple)
-#     trade_type = django_filters.ModelMultipleChoiceFilter(queryset=Trade.objects.all(), widget = CheckboxSelectMultiple)
-#     cities = CustomFilterList(name="city", lookup_type="in")
-
-#     class Meta:
-#         model = Property
-#         fields = ['cities', 'city', 'trade_type']
-
-
+ 
