@@ -10,11 +10,11 @@ export default function UpdateProfilePage({ access_token }) {
 }
 
 export async function getServerSideProps({ req }) {
- console.log(req.cookies.access)
+//  console.log(req.cookies.access)
     const access_token = req.cookies.access;
   
     const user = await isAuthenticatedUser(access_token);
-    console.log('dddddddddddddddddddddddddddddddddddddddddd',user)
+    // console.log('dddddddddddddddddddddddddddddddddddddddddd',user)
     if(user===false){
         return{
             redirect:{

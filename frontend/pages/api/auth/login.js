@@ -13,7 +13,7 @@ export default async (req, res) => {
         { headers: { "Content-Type": "application/json" } }
       );
  
-console.log('responseeeeee',response.data.access)
+// console.log('responseeeeee',response.data.access)
       if (response.data.access) {
         res.setHeader("Set-Cookie", [
         
@@ -25,7 +25,7 @@ console.log('responseeeeee',response.data.access)
             path: "/",
           }),
         ]);
-        console.log('first')
+        // console.log('first')
      return res.status(200).json({success:true})
       } else {
         res.status(response.status).json({ error: "Authentication failed" });

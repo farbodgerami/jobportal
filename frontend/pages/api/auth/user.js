@@ -5,7 +5,7 @@ import cookie from "cookie";
 export default async (req, res) => {
   if (req.method === "GET") {
     const cookies = cookie.parse(req.headers.cookie || "");
-    console.log("from usercookieeeeeeeeeeeeee",cookies)
+     
     const access = cookies.access || false;
     if (!access) {
       return res.status(401).json({ message: "Login first to load user" });
