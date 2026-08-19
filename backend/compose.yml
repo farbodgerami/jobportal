@@ -42,11 +42,7 @@ services:
     build: .
     ports:
       - "81:80"
- 
-
-
-
-
+  
 volumes:
   jobpostgres:
     external: true
